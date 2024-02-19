@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+
+    <script>function importpost(){
+        var adres1=document.getElementById('adres1').value;
+        var adres2=document.getElementById('adres1').value;
+        var tezina=document.getElementById('tezina').value;
+        var rd1=document.getElementById('rad1');
+        var rd2=document.getElementById('rad2');
+        var idd=document.getElementById('idd').value;
+        if(!adres1==""&&!adres2==""&&!tezina==""&&!((rd1.checked=false) && (rd2.checked=false))&&!idd==""){
+            var rd;
+            if(rd1.checked){
+                rd=rd1.value;
+            }
+            else{rd=rd2.value;}
+            idd=idd.toLowerCase();
+            idd=idd.replace(/ /g,"-");
+            var cena =0;
+            if (tezina<5)
+            {cena= 500;}
+            else {cena=1200;}
+            var a=document.getElementById('tbl');
+            a.innerHTML+="<tr>" +
+                "<td>"+idd+"</td>" +
+                "<td>"+adres1+"</td>"+
+                "<td>"+adres2+"</td>" +
+                "<td>"+cena+"</td>" +
+                "<td><button onclick='dostaveno(this)'>dostaveno</button><button onclick='otkazano(this)'>otkazano</button></td>" +
+                "</tr>"
+
+
+        }
+        else{alert('ne ste vnele seeeee' );}
+    }
+    function dostaveno(a) {
+        a.disabled=true;
+        a.nextElementSibling.disabled=true;
+        a.parentElement.parentElement.style.background="#00FF00";
+
+    }
+    function otkazano(b){b.hide('slow', briss(b));}
+
+    function briss(b) {
+        b.parentElement.parentElement.remove();
+
+    }
+
+
+    </script>
+    <style>
+        #a1{float: left;
+            clear: both; width: 100%}
+        #a2{float: left;
+            width: 49%}
+        #a3{float: left;width: 49%}
+
+    </style>
+</head>
+<body>
+<div id="a1"><h1>карго достава на пратки</h1>
+    <div><label>адреса на испраќач</label><input type="text" id="adres1"></div>
+    <div><label>адреса на примач</label><input type="text" id="adres2"></div>
+    <div><label>тежина на пратка</label><input type="number" id="tezina"></div>
+    <div><label>начин на плаќање</label><input type="radio" value="prakane" id="rad1"><label>праќање</label>
+        <input type="radio" value="primane"id="rad2"><label>примање</label></div>
+    <div><label>id на профил</label><input type="text" id="idd"></div>
+        <button onclick="importpost()">внеси</button>
+    </div>
+
+</div>
+<div>
+<div id="a3">
+    <h1 id="post">внесени пратки </h1>
+    <h2>вкупна сума</h2>
+    <table id="tbl"><thead><tr><td>ID</td><td>адреса испраќач</td><td>адреса примач</td><td>цена</td><td>акции</td></tr></thead></table></div>
+<div id="a2"><h1>откажани нарачки</h1></div>
+</div>
+</body>
+</html>
